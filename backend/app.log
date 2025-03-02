@@ -1770,3 +1770,14 @@ AttributeError: 'User' object has no attribute 'first_name'
 2025-03-02 18:00:29,468 - INFO - 127.0.0.1 - - [02/Mar/2025 18:00:29] "[36mGET /swaggerui/droid-sans.css HTTP/1.1[0m" 304 -
 2025-03-02 18:00:29,468 - INFO - 127.0.0.1 - - [02/Mar/2025 18:00:29] "[36mGET /swaggerui/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
 2025-03-02 18:00:29,571 - INFO - 127.0.0.1 - - [02/Mar/2025 18:00:29] "GET /swagger.json HTTP/1.1" 200 -
+2025-03-02 18:13:13,127 - INFO - 🔹 Fetching Keycloak public keys from: http://localhost:8080/realms/YesLove_Auth/protocol/openid-connect/certs
+2025-03-02 18:13:13,156 - INFO - ✅ Successfully fetched Keycloak public keys.
+2025-03-02 18:13:13,158 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-03-02 18:13:13,158 - INFO - [33mPress CTRL+C to quit[0m
+2025-03-02 18:13:21,529 - INFO - 127.0.0.1 - - [02/Mar/2025 18:13:21] "GET /swagger HTTP/1.1" 200 -
+2025-03-02 18:13:21,559 - INFO - 127.0.0.1 - - [02/Mar/2025 18:13:21] "[36mGET /swaggerui/droid-sans.css HTTP/1.1[0m" 304 -
+2025-03-02 18:13:21,562 - INFO - 127.0.0.1 - - [02/Mar/2025 18:13:21] "[36mGET /swaggerui/swagger-ui.css HTTP/1.1[0m" 304 -
+2025-03-02 18:13:21,563 - INFO - 127.0.0.1 - - [02/Mar/2025 18:13:21] "[36mGET /swaggerui/swagger-ui-bundle.js HTTP/1.1[0m" 304 -
+2025-03-02 18:13:21,564 - INFO - 127.0.0.1 - - [02/Mar/2025 18:13:21] "[36mGET /swaggerui/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
+2025-03-02 18:13:21,616 - INFO - 127.0.0.1 - - [02/Mar/2025 18:13:21] "GET /swagger.json HTTP/1.1" 200 -
