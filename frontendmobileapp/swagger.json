@@ -1,0 +1,915 @@
+{
+    "swagger": "2.0",
+    "basePath": "/",
+    "paths": {
+        "/api/about/{keycloak_id}": {
+            "parameters": [
+                {
+                    "name": "keycloak_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Get user contact & education details for About section",
+                "operationId": "get_about_user",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/change_password": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Change user password via Keycloak API",
+                "operationId": "post_change_password",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/delete_account": {
+            "delete": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Delete user account via Keycloak API",
+                "operationId": "delete_delete_account",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/email_notifications": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Update email notification settings",
+                "operationId": "post_email_notifications",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            },
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Get email notification settings",
+                "operationId": "get_email_notifications",
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/feed": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Fetch posts based on selected feed type (All Updates, Mentions, Favorites, Friends, Groups)",
+                "operationId": "get_feed",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/follow/{user_id}": {
+            "parameters": [
+                {
+                    "name": "user_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Follow or unfollow a user",
+                "operationId": "post_follow_user",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/followers/{user_id}": {
+            "parameters": [
+                {
+                    "name": "user_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Fetch all followers of a user",
+                "operationId": "get_get_followers",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/GetFollowersRequest"
+                        }
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/following/{user_id}": {
+            "parameters": [
+                {
+                    "name": "user_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Fetch all users the current user is following",
+                "operationId": "get_get_following",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/GetFollowingRequest"
+                        }
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/get_messages/{receiver_id}": {
+            "parameters": [
+                {
+                    "name": "receiver_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Fetch chat messages between two users",
+                "operationId": "get_get_messages",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/login": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/LoginResponse"
+                        }
+                    }
+                },
+                "summary": "Exchange user credentials for a Keycloak access token and check user type",
+                "operationId": "post_login",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/LoginRequest"
+                        }
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Logout user from Keycloak",
+                "operationId": "post_logout",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/LogoutRequest"
+                        }
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/post": {
+            "post": {
+                "responses": {
+                    "201": {
+                        "description": "Post created successfully"
+                    }
+                },
+                "summary": "Create a new post",
+                "operationId": "post_create_post",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    },
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/CreatePostRequest"
+                        }
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/post/{post_id}/comment": {
+            "parameters": [
+                {
+                    "name": "post_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Add a comment to a post",
+                "operationId": "post_add_comment",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/post/{post_id}/comments": {
+            "parameters": [
+                {
+                    "name": "post_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Fetch all comments for a post",
+                "operationId": "get_get_comments",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/GetMessagesRequest"
+                        }
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/post/{post_id}/like": {
+            "parameters": [
+                {
+                    "name": "post_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Like or unlike a post",
+                "operationId": "post_like_post",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/post/{post_id}/reaction": {
+            "parameters": [
+                {
+                    "name": "post_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Add or update a reaction to a post (like, love, laugh, etc",
+                "description": ").",
+                "operationId": "post_react_to_post",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/profile/{keycloak_id}": {
+            "parameters": [
+                {
+                    "name": "keycloak_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ProfileResponse"
+                        }
+                    }
+                },
+                "summary": "Get user profile and posts",
+                "operationId": "get_user_profile",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/profile_visibility": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Update profile visibility settings",
+                "operationId": "post_profile_visibility",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            },
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Get profile visibility settings",
+                "operationId": "get_profile_visibility",
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/refresh_token": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Refresh expired access token using Keycloak refresh token",
+                "operationId": "post_refresh_token",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/RefreshTokenRequest"
+                        }
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/reset_password": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Send password reset email via Keycloak API",
+                "operationId": "post_reset_password",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/ResetPasswordRequest"
+                        }
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/send_message": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Send a private message",
+                "operationId": "post_send_message",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/set_user_type": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Set user type (professional or standard) for new users",
+                "operationId": "post_set_user_type",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/signup": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Keycloak handles user registration",
+                "operationId": "post_signup",
+                "tags": [
+                    "api"
+                ]
+            }
+        },
+        "/api/update_profile": {
+            "put": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "summary": "Update user profile",
+                "operationId": "put_update_profile",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Bearer <token>",
+                        "default": "Bearer <your-access-token>"
+                    }
+                ],
+                "tags": [
+                    "api"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "YesLove API",
+        "version": "1.0"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "tags": [
+        {
+            "name": "api",
+            "description": "API Endpoints"
+        }
+    ],
+    "definitions": {
+        "LoginRequest": {
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "description": "User's Keycloak username"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "User's Keycloak password"
+                }
+            },
+            "type": "object"
+        },
+        "LoginResponse": {
+            "properties": {
+                "access_token": {
+                    "type": "string",
+                    "description": "JWT access token"
+                },
+                "expires_in": {
+                    "type": "integer",
+                    "description": "Access token expiration time in seconds"
+                },
+                "refresh_expires_in": {
+                    "type": "integer",
+                    "description": "Refresh token expiration time in seconds"
+                },
+                "refresh_token": {
+                    "type": "string",
+                    "description": "JWT refresh token"
+                },
+                "token_type": {
+                    "type": "string",
+                    "description": "Type of token, typically 'Bearer'"
+                },
+                "not-before-policy": {
+                    "type": "integer",
+                    "description": "Time before which the token is not valid"
+                },
+                "session_state": {
+                    "type": "string",
+                    "description": "Session identifier"
+                },
+                "scope": {
+                    "type": "string",
+                    "description": "Scopes associated with the token"
+                }
+            },
+            "type": "object"
+        },
+        "LogoutRequest": {
+            "properties": {},
+            "type": "object"
+        },
+        "RefreshTokenRequest": {
+            "required": [
+                "refresh_token"
+            ],
+            "properties": {
+                "refresh_token": {
+                    "type": "string",
+                    "description": "Valid refresh token"
+                }
+            },
+            "type": "object"
+        },
+        "ProfileResponse": {
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "description": "User's username"
+                },
+                "bio": {
+                    "type": "string",
+                    "description": "User bio"
+                },
+                "profile_pic": {
+                    "type": "string",
+                    "description": "Profile picture URL"
+                },
+                "user_type": {
+                    "type": "string",
+                    "description": "User type: professional or standard"
+                },
+                "contact_info": {
+                    "$ref": "#/definitions/ContactInfo"
+                },
+                "education_info": {
+                    "$ref": "#/definitions/EducationInfo"
+                },
+                "posts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PostSummary"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "ContactInfo": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "User's full name"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Email address"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Phone number"
+                },
+                "address": {
+                    "type": "string",
+                    "description": "User's address"
+                },
+                "website": {
+                    "type": "string",
+                    "description": "User's personal website"
+                }
+            },
+            "type": "object"
+        },
+        "EducationInfo": {
+            "properties": {
+                "birthday": {
+                    "type": "string",
+                    "description": "User's birthday"
+                },
+                "education": {
+                    "type": "string",
+                    "description": "Education details"
+                },
+                "institution": {
+                    "type": "string",
+                    "description": "Institution name"
+                },
+                "employment": {
+                    "type": "string",
+                    "description": "Current employment details"
+                }
+            },
+            "type": "object"
+        },
+        "PostSummary": {
+            "properties": {
+                "content": {
+                    "type": "string",
+                    "description": "Post content"
+                },
+                "timestamp": {
+                    "type": "string",
+                    "description": "Timestamp of post"
+                }
+            },
+            "type": "object"
+        },
+        "ResetPasswordRequest": {
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "User's email for password reset"
+                }
+            },
+            "type": "object"
+        },
+        "CreatePostRequest": {
+            "required": [
+                "content"
+            ],
+            "properties": {
+                "content": {
+                    "type": "string",
+                    "description": "Content of the post"
+                }
+            },
+            "type": "object"
+        },
+        "GetMessagesRequest": {
+            "properties": {},
+            "type": "object"
+        },
+        "GetFollowersRequest": {
+            "properties": {},
+            "type": "object"
+        },
+        "GetFollowingRequest": {
+            "properties": {},
+            "type": "object"
+        }
+    },
+    "responses": {
+        "ParseError": {
+            "description": "When a mask can't be parsed"
+        },
+        "MaskError": {
+            "description": "When any error occurs on mask"
+        }
+    }
+}

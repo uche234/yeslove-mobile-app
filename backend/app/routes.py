@@ -38,6 +38,7 @@ class Signup(Resource):
 @main_api.route("/login")
 class Login(Resource):
     @main_api.expect(models["login"])  # ✅ Attach the correct model
+    @main_api.response(200, "Success", models["login_response"])  # ✅ Ensure correct model
     def post(self):
         """Exchange user credentials for a Keycloak access token and check user type."""
         from app.utils import verify_jwt  # ✅ Avoid circular imports

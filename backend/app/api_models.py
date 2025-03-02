@@ -59,6 +59,17 @@ def register_models(api):
         "password": fields.String(required=True, description="User's Keycloak password"),
     })
 
+    models["login_response"] = api.model("LoginResponse", {
+        "access_token": fields.String(description="JWT access token"),
+        "expires_in": fields.Integer(description="Access token expiration time in seconds"),
+        "refresh_expires_in": fields.Integer(description="Refresh token expiration time in seconds"),
+        "refresh_token": fields.String(description="JWT refresh token"),
+        "token_type": fields.String(description="Type of token, typically 'Bearer'"),
+        "not-before-policy": fields.Integer(description="Time before which the token is not valid"),
+        "session_state": fields.String(description="Session identifier"),
+        "scope": fields.String(description="Scopes associated with the token"),
+    })
+
     models["set_user_type"] = api.model("SetUserTypeRequest", {
         "user_type": fields.String(required=True, description="Choose 'professional' or 'standard'"),
         "license": fields.String(description="License number (for professional users only)"),

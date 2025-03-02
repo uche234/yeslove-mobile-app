@@ -2,7 +2,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import React, { useState } from 'react';
 import { useRouter } from "expo-router";
 import axios from 'axios';
-
+import {ApiApiFactory, ApiApi} from "../generated-api/api";
 
 
 const Login = () => {
@@ -23,27 +23,19 @@ const handleUsernameChange = (input) => {
 }
 
 const testLogin = (username, password) => {
-  axios.post(
-    'http://localhost:8080/realms/master/protocol/openid-connect/token',
-    new URLSearchParams({
-      response_type: 'token',
-      scope: 'openid',
-      client_id: 'yeslove',
-      client_secret: 'ffFrajirLUbcyVyLuDkluTvPxZbptba4',
-      username: username,
-      password: password,
-      grant_type: 'password',
-    }),
-    {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    }
-  ).then((response) => {
+  realmName = "YesLove_Auth";
+
+  ApiApiFactory({}, "http://localhost:5000").postLogin({password: password, username: username})
+  .then((response) => {
+    //TODO store access and refresh token in redux store
     router.replace("/(tabs)/home");  
   }).catch((error) => {
     console.error('Login failed:', error);
   });
+
+
+  ApiApiFactory().getUserProfile()
+
 };
 
 
