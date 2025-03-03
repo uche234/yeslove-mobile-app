@@ -18,16 +18,15 @@ services:
     ports:
       - "${PORT_KEYCLOAK}:8080"
     volumes:
-      - ./imports:/opt/jboss/keycloak/imports
+      - ./imports:/opt/keycloak/data/import
     environment:
       KC_DB: postgres
-      KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm-export.json -Dkeycloak.profile.feature.upload_scripts=enabled
       KC_DB_URL: jdbc:postgresql://postgres:5432/${POSTGRESQL_DB}
       KC_DB_USERNAME: ${POSTGRESQL_USER}
       KC_DB_PASSWORD: ${POSTGRESQL_PASS}
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN_USER}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASS}
-    command: start-dev
+    command: start-dev --import-realm
     depends_on:
       - postgres
     restart: unless-stopped
