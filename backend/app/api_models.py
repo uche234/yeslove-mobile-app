@@ -153,5 +153,12 @@ def register_models(api):
             description="Reaction type: 'like', 'love', 'laugh', 'angry', etc."
         )
     })
+   
+    models["user_query"] = api.model("UserQuery", {
+    "username": fields.String(required=True, descriptions="User's username (Required)"),
+    "email": fields.String(description="User's email (Optional)"),
+    "user_id": fields.Integer(description="User's database ID (Optional)"),
+    })
+
 
     return models

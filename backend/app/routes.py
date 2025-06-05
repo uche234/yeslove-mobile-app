@@ -214,6 +214,53 @@ class RefreshToken(Resource):
 
 
 # -------------------------
+# 🚀 Get KeyCloak ID for X User
+# -------------------------
+    
+@main_api.route("/user/keycloak_id")
+class GetUserKeycloakIDFlexible(Resource):
+    @require_auth()
+    @main_api.expect(models["auth_header"],models["user_query"])  # ✅ Require Authorization Header
+    #@main_api.expect(models["user_query"])  # ✅ Attach model
+    def get(self):
+        """Retrieve a user's Keycloak ID by username (required), with optional email or user ID."""
+        data = request.args
+        username = data.get("username")
+        email = data.get("email")
+        user_id = data.get("user_id")
+
+        logger.info(f"🔍 User Keycloak ID Lookup initiated by {request.user['username']}")
+
+        # ✅ Enforce username requirement
+        if not username:
+            logger.warning("❌ Missing required parameter: username")
+            return {"message": "Username is required"}, 400
+
+        # ✅ Build the query dynamically
+        query = User.query.filter_by(username=username)
+        log_filters = {"username": username}
+
+        if email:
+            query = query.filter_by(email=email)
+            log_filters["email"] = email
+        if user_id:
+            query = query.filter_by(id=user_id)
+            log_filters["user_id"] = user_id
+
+        logger.info(f"🔹 Querying database with filters: {log_filters}")
+
+        user = query.first()
+
+        if not user:
+            logger.warning(f"❌ User not found with filters: {log_filters}")
+            return {"message": "User not found"}, 404
+
+        logger.info(f"✅ Found user: {user.username} (Keycloak ID: {user.keycloak_id})")
+
+        return {"keycloak_id": user.keycloak_id}, 200
+
+
+# -------------------------
 # 🚀 PROFILE ROUTES
 # -------------------------
 
@@ -589,7 +636,7 @@ class ReactToPost(Resource):
 # 🚀 FRIEND SYSTEM
 # -------------------------
 
-@main_api.route("/follow/<int:user_id>")
+@main_api.route("/follow/<string:keycloak_id>")
 class FollowUser(Resource):
     @require_auth()
     @main_api.expect(models["auth_header"])  # ✅ Require Authorization Header
@@ -692,7 +739,7 @@ class GetComments(Resource):
 # 🚀 FOLLOW ROUTES
 # -------------------------
 
-@main_api.route("/follow/<int:user_id>")
+@main_api.route("/follow/<string:keycloak_id>")
 class FollowUser(Resource):
     @require_auth()
     @main_api.expect(models["auth_header"])  # ✅ Require Authorization Header
@@ -726,7 +773,7 @@ class FollowUser(Resource):
         return {"message": "Followed successfully"}, 201
 
 
-@main_api.route("/followers/<int:user_id>")
+@main_api.route("/followers/<string:keycloak_id>")
 class GetFollowers(Resource):
     @main_api.expect(models["followers"])  # ✅ Attach model
     def get(self, user_id):
@@ -738,7 +785,7 @@ class GetFollowers(Resource):
         ], 200
 
 
-@main_api.route("/following/<int:user_id>")
+@main_api.route("/following/<string:keycloak_id>")
 class GetFollowing(Resource):
     @main_api.expect(models["following"])  # ✅ Attach model
     def get(self, user_id):
